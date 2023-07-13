@@ -30,8 +30,8 @@ agent any
                 }
 
                  
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']],
-                    userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
+                //checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                //    userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
 
 
                 // checkout([$class: 'GitSCM', 
@@ -47,7 +47,7 @@ agent any
                 // Run shell script
                 //sh "./jenkins/script/scripted_pipeline_ex_2.sh"
 
-                sh "cd react-nodejs-nginx"
+                //sh "cd react-nodejs-nginx"
 
             }
         }
