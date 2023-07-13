@@ -12,7 +12,16 @@ pipeline {
             steps {
                 // checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], 
                 //     userRemoteConfigs: [url: 'https://github.com/how2coding/react-nodejs-nginx.git']])
-                git url: 'https://github.com/how2coding/react-nodejs-nginx.git', branch: 'main'
+
+
+                checkout([$class: 'GitSCM', 
+                branches: [[name: '*/main']],
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [[$class: 'CleanCheckout']],
+                submoduleCfg: [], 
+                userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
+
+                // git url: 'https://github.com/how2coding/react-nodejs-nginx.git', branch: 'main'
                 // Change file permisson
                 //sh "chmod +x -R ./jenkins"
                 // Run shell script
