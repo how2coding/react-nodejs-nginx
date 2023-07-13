@@ -28,7 +28,7 @@ agent any
                 // Run shell script
                 //sh "./jenkins/script/scripted_pipeline_ex_2.sh"
 
-                sh "ls -lst"
+                sh "dir"
             }
         }
 
