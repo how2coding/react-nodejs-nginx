@@ -1,16 +1,16 @@
 pipeline {
-    //   agent{ 
-    //     label 'build'
+      agent{ 
+        label 'build'
         
-    // }
-agent any
+    }
+// agent any
 
 
     stages {
 
         stage('scm') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], 
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], extensions: [], 
                     userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
                 sh "ls -lst"
             }
