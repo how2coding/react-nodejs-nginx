@@ -8,7 +8,7 @@ pipeline {
 
     stages {
 
-        stage('build') {
+        stage('scm') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], 
                     userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
