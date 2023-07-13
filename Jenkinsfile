@@ -10,7 +10,26 @@ agent any
 
         stage('scm') {
             steps {
-                 cleanWs()
+                cleanWs()
+                 echo 'a'
+                determineOS()
+                echo 'b'
+                // sh 'echo "[Version 1.0.0]" | tee -a changelog.txt'
+                sayHello()
+                //getServiceVersion('.', 'changelog.txt', 'myservice')
+                // cat service.properties
+                // sendEmail('failed', 'test@test.com')
+                script {
+                    def utils = new Utils()
+                    if (utils.isWindows()) {
+                        echo '<-- Is windwos -->'
+                    }
+                    else {
+                        echo '<-- Is linux -->'
+                    }
+                }
+
+                 
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']],
                     userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
 
@@ -28,7 +47,8 @@ agent any
                 // Run shell script
                 //sh "./jenkins/script/scripted_pipeline_ex_2.sh"
 
-                sh "dir"
+                sh "cd react-nodejs-nginx"
+
             }
         }
 
