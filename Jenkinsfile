@@ -11,23 +11,11 @@ agent any
         stage('scm') {
             steps {
                 cleanWs()
-                 echo 'a'
-                determineOS()
-                echo 'b'
-                // sh 'echo "[Version 1.0.0]" | tee -a changelog.txt'
-                sayHello()
-                //getServiceVersion('.', 'changelog.txt', 'myservice')
-                // cat service.properties
-                // sendEmail('failed', 'test@test.com')
-                script {
-                    def utils = new Utils()
-                    if (utils.isWindows()) {
-                        echo '<-- Is windwos -->'
-                    }
-                    else {
-                        echo '<-- Is linux -->'
-                    }
-                }
+                  if (isUnix()) {
+                    echo 'LINUX'
+                  }else{
+echo 'WINDOWS'
+                  }
 
                  
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']],
