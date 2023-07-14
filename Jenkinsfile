@@ -25,7 +25,12 @@ agent any
                    
                     checkout([$class: 'GitSCM', branches: [[name: '*/main']],
                         userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
-
+                    
+                    if(myOS=="ubuntu"){
+                        sh "ls -lst"
+                    }else{
+                        bat 'dir'
+                    }
 
                     // checkout([$class: 'GitSCM', 
                     // branches: [[name: '*/main']],
