@@ -1,17 +1,22 @@
 def myOS = ""
 pipeline {
-     
+     /*
    agent{ 
          label 'build'
         
      }
-     
+     */
 //agent any
+      agent none
 
     
     stages {
 
         stage('scm') {
+             agent{ 
+                   label 'build'
+                  
+               }
             steps {
                 script {
                     cleanWs()
@@ -42,6 +47,10 @@ pipeline {
 
 
         stage('build') {
+             agent{ 
+                   label 'build'
+                  
+               }
             steps {
                 script {
                     if(myOS=="ubuntu"){
