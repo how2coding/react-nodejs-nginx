@@ -43,7 +43,7 @@ pipeline {
             steps {
                
                 if(myOS=="ubuntu"){
-                    docker build -f Dockerfile-prod -t react-nodejs-nginx .
+                    sh "docker build -f Dockerfile-prod -t react-nodejs-nginx ."
                 }else{
                     bat 'dir'
                 }
