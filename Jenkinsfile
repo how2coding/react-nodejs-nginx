@@ -1,10 +1,10 @@
 def myOS = ""
 pipeline {
-    //   agent{ 
-    //     label 'build'
+      agent{ 
+         label 'build'
         
-    // }
-agent any
+     }
+//agent any
 
     
     stages {
@@ -21,7 +21,7 @@ agent any
                         echo "Error detected, but we will continue."
                         myOS="windows"
                     }
-
+                     echo "========>my os is "+myOS
                    
                     checkout([$class: 'GitSCM', branches: [[name: '*/main']],
                         userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
@@ -31,19 +31,7 @@ agent any
                     }else{
                         bat 'dir'
                     }
-
-                    // checkout([$class: 'GitSCM', 
-                    // branches: [[name: '*/main']],
-                    // doGenerateSubmoduleConfigurations: false,
-                    // extensions: [[$class: 'CleanCheckout']],
-                    // submoduleCfg: [], 
-                    // userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
-
-                    // git url: 'https://github.com/how2coding/react-nodejs-nginx.git', branch: 'main'
-                    // Change file permisson
-                    //sh "chmod +x -R ./jenkins"
-                    // Run shell script
-                    //sh "./jenkins/script/scripted_pipeline_ex_2.sh"
+                  
  
                 }
 
@@ -53,8 +41,12 @@ agent any
 
         stage('build') {
             steps {
-                echo "========>my os is "+myOS
-               //sh "echo build"
+               
+                if(myOS=="ubuntu"){
+                    docker build -f Dockerfile-prod -t react-nodejs-nginx .
+                }else{
+                    bat 'dir'
+                }
             }
             
         }
