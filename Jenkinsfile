@@ -59,13 +59,6 @@ agent any
             
         }
         
-        stage('deploy') {
-          
-            steps {
-               //sh "echo deploy"
-               
-            }
-            
-        }
+       
     }
 }
