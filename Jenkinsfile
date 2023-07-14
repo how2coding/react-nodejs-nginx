@@ -46,6 +46,8 @@ pipeline {
                 script {
                     if(myOS=="ubuntu"){
                         sh "docker build -f Dockerfile-prod -t react-nodejs-nginx ."
+                        sh "docker tag react-nodejs-nginx registry.wangchan.io:5000/react-nodejs-nginx"
+                        sh "docker push registry.wangchan.io:5000/react-nodejs-nginx"
                     }else{
                         bat 'dir'
                     }
