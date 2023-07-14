@@ -66,7 +66,23 @@ pipeline {
             
         }
         
-        
+        stage('run') {
+             agent{ 
+                   label 'prod-server'
+                  
+               }
+            steps {
+                script {
+                    if(myOS=="ubuntu"){
+                        sh "docker run --name react -p 8081:8080 -d registry.wangchan.io:5000/react-nodejs-nginx:latest"                     
+                    }else{
+                        bat 'dir'
+                    }
+
+                }
+            }
+            
+        }
        
     }
 }
