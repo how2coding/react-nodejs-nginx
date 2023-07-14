@@ -1,12 +1,12 @@
 def myOS = ""
 pipeline {
      
-   /*agent{ 
+   agent{ 
          label 'build'
         
      }
-     */
-agent any
+     
+//agent any
 
     
     stages {
