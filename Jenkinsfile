@@ -48,7 +48,7 @@ agent any
 
         stage('build') {
             steps {
-                echo myOS
+                echo "========>my os is "+myOS
                sh "echo build"
             }
             
