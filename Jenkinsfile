@@ -5,7 +5,9 @@ pipeline {
     // }
 agent any
 
-
+     environment {
+        OS = ""
+    }
     stages {
 
         stage('scm') {
@@ -14,14 +16,16 @@ agent any
                     cleanWs()
                     try {
                         sh "ls -lst"
+                        AOEU="ubuntu"
                     } catch (err) {
                         echo err.getMessage()
                         echo "Error detected, but we will continue."
+                        OS="windows"
                     }
 
-                 
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']],
-                        userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
+                    echo $OS
+                    // checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                    //     userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
 
 
                     // checkout([$class: 'GitSCM', 
