@@ -36,7 +36,7 @@ agent any
                     //sh "chmod +x -R ./jenkins"
                     // Run shell script
                     //sh "./jenkins/script/scripted_pipeline_ex_2.sh"
-
+ 
                 }
 
             }
