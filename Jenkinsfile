@@ -23,8 +23,8 @@ agent any
                     }
 
                    
-                    // checkout([$class: 'GitSCM', branches: [[name: '*/main']],
-                    //     userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                        userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
 
 
                     // checkout([$class: 'GitSCM', 
@@ -49,7 +49,7 @@ agent any
         stage('build') {
             steps {
                 echo "========>my os is "+myOS
-               sh "echo build"
+               //sh "echo build"
             }
             
         }
@@ -57,7 +57,7 @@ agent any
         stage('deploy') {
           
             steps {
-               sh "echo deploy"
+               //sh "echo deploy"
                
             }
             
