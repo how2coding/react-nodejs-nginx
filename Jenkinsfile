@@ -41,11 +41,13 @@ pipeline {
 
         stage('build') {
             steps {
-               
-                if(myOS=="ubuntu"){
-                    sh "docker build -f Dockerfile-prod -t react-nodejs-nginx ."
-                }else{
-                    bat 'dir'
+                script {
+                    if(myOS=="ubuntu"){
+                        sh "docker build -f Dockerfile-prod -t react-nodejs-nginx ."
+                    }else{
+                        bat 'dir'
+                    }
+
                 }
             }
             
