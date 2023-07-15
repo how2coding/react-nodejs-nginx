@@ -18,21 +18,17 @@ pipeline {
                                        
                     checkout([$class: 'GitSCM', branches: [[name: '*/main']],
                         userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
-                    
-               
-
+      
             }
         }
 
 
-        stage('build') {
-          
+        stage('build') {          
             steps {
-                sh   "yarn"
+                sh "yarn"
                 sh "yarn build"
 
-            }
-            
+            }            
         }
         
         stage('deploy') {
