@@ -33,19 +33,35 @@ pipeline {
             
         }
         stage('kill') {
-           script {
-                steps {
-                    sh "docker kill react"                     
-                }
-           }
+          
+            steps {
+                    script {
+                        try{ 
+                            sh "docker kill react"                     
+                     } catch (err) {
+                        echo err.getMessage()
+                        echo "Error detected, but we will continue."
+                      
+                    }
+                    }
+            }
+        
             
         }
         stage('kill') {
-           script {
-                steps {
-                    sh "docker rm react"                     
+           
+            steps {
+                script {
+                    try{
+                         sh "docker rm react"                     
+                     } catch (err) {
+                        echo err.getMessage()
+                        echo "Error detected, but we will continue."
+                     
+                    }
                 }
-           }
+            }
+        
             
         }
         stage('run') {
