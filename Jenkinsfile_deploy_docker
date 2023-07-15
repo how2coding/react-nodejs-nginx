@@ -48,7 +48,7 @@ pipeline {
         
             
         }
-        stage('kill') {
+        stage('rm') {
            
             steps {
                 script {
