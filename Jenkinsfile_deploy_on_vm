@@ -28,15 +28,18 @@ pipeline {
         stage('build') {
           
             steps {
-                
+                sh "yarn"
+                sh "yarn build"
+
             }
             
         }
         
-        stage('run') {
+        stage('deploy') {
            
             steps {
-                
+                sh "ls -lst"
+                sh "cp -a build/* /var/www/html"
             }
             
         }
