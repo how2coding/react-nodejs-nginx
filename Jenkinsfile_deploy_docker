@@ -32,7 +32,22 @@ pipeline {
             }
             
         }
-        
+        stage('kill') {
+           script {
+                steps {
+                    sh "docker kill react"                     
+                }
+           }
+            
+        }
+        stage('kill') {
+           script {
+                steps {
+                    sh "docker rm react"                     
+                }
+           }
+            
+        }
         stage('run') {
            
             steps {
