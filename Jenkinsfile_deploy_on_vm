@@ -1,0 +1,45 @@
+def myOS = ""
+pipeline {
+
+//agent any
+    agent{ 
+         label 'prod-server'
+        
+     }
+
+    
+    stages {
+
+        stage('scm') {
+          
+            steps {
+                
+                    cleanWs()
+                                       
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                        userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
+                    
+               
+
+            }
+        }
+
+
+        stage('build') {
+          
+            steps {
+                
+            }
+            
+        }
+        
+        stage('run') {
+           
+            steps {
+                
+            }
+            
+        }
+       
+    }
+}

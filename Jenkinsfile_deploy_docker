@@ -1,0 +1,45 @@
+def myOS = ""
+pipeline {
+
+//agent any
+    agent{ 
+         label 'prod-server'
+        
+     }
+
+    
+    stages {
+
+        stage('scm') {
+          
+            steps {
+                
+                    cleanWs()
+                                       
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                        userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
+                    
+               
+
+            }
+        }
+
+
+        stage('build') {
+          
+            steps {
+                    sh "docker build -f Dockerfile-prod -t react-nodejs-nginx ."
+            }
+            
+        }
+        
+        stage('run') {
+           
+            steps {
+                sh "docker run --name react -p 8081:8080 -d react-nodejs-nginx:latest"                     
+            }
+            
+        }
+       
+    }
+}
