@@ -1,44 +1,45 @@
 def myOS = ""
 pipeline {
+  //agent any
+  agent {
+    label 'prod-server'
+  }
 
-//agent any
-    agent{ 
-         label 'prod-server'
-        
-     }
+  stages {
 
-    
-    stages {
+    stage('scm') {
 
-        stage('scm') {
-          
-            steps {
-                
-                    cleanWs()
-                                       
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']],
-                        userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
-      
-            }
-        }
+      steps {
 
+        cleanWs()
 
-        stage('build') {          
-            steps {
-                sh "yarn"
-                sh "yarn build"
+        checkout([$class: 'GitSCM', branches: [
+            [name: '*/main'] 
+          ],
+          userRemoteConfigs: [
+            [url: 'https://github.com/how2coding/react-nodejs-nginx.git']
+          ]
+        ])
 
-            }            
-        }
-        
-        stage('deploy') {
-           
-            steps {
-                sh "ls -lst"
-                sh "cp -a build/* /var/www/html"
-            }
-            
-        }
-       
+      }
     }
+
+    stage('build') {
+      steps {
+        sh "yarn"
+        sh "yarn build"
+
+      }
+    }
+
+    stage('deploy') {
+
+      steps {
+        sh "ls -lst"
+        sh "cp -a build/* /var/www/html"
+      }
+
+    }
+
+  }
 }

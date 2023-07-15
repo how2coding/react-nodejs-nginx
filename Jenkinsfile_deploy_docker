@@ -1,76 +1,75 @@
 def myOS = ""
 pipeline {
 
-//agent any
-    agent{ 
-         label 'prod-server'
-        
-     }
+  //agent any
+  agent {
+    label 'prod-server'
 
-    
-    stages {
+  }
 
-        stage('scm') {
-          
-            steps {
-                
-                    cleanWs()
-                                       
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']],
-                        userRemoteConfigs: [[url: 'https://github.com/how2coding/react-nodejs-nginx.git']]])
-                    
-               
+  stages {
 
-            }
-        }
+    stage('scm') {
 
+      steps {
 
-        stage('build') {
-          
-            steps {
-                    sh "docker build -f Dockerfile-prod -t react-nodejs-nginx ."
-            }
-            
-        }
-        stage('kill') {
-          
-            steps {
-                    script {
-                        try{ 
-                            sh "docker kill react"                     
-                     } catch (err) {
-                        echo err.getMessage()
-                        echo "Error detected, but we will continue."
-                      
-                    }
-                    }
-            }
-        
-            
-        }
-        stage('rm') {
-           
-            steps {
-                script {
-                    try{
-                         sh "docker rm react"                     
-                     } catch (err) {
-                        echo err.getMessage()
-                        echo "Error detected, but we will continue."
-                     
-                    }
-                }
-            }
-        
-            
-        }
-        stage('run') {
-           
-            steps {
-                sh "docker run --name react -p 8081:8080 -d react-nodejs-nginx:latest"                     
-            }
-            
-        }
-       
+        cleanWs()
+
+        checkout([$class: 'GitSCM', branches: [
+            [name: '*/main']
+          ],
+          userRemoteConfigs: [
+            [url: 'https://github.com/how2coding/react-nodejs-nginx.git']
+          ]
+        ])
+
+      }
     }
+
+    stage('build') {
+
+      steps {
+        sh "docker build -f Dockerfile-prod -t react-nodejs-nginx ."
+      }
+
+    }
+    stage('kill') {
+
+      steps {
+        script {
+          try {
+            sh "docker kill react"
+          } catch (err) {
+            echo err.getMessage()
+            echo "Error detected, but we will continue."
+
+          }
+        }
+      }
+
+    }
+    stage('rm') {
+
+      steps {
+        script {
+          try {
+            sh "docker rm react"
+          } catch (err) {
+            echo err.getMessage()
+            echo "Error detected, but we will continue."
+
+          }
+        }
+      }
+
+    }
+    stage('run') {
+
+      steps {
+        sh "docker run --name react -p 8081:8080 -d react-nodejs-nginx:latest"
+      }
+
+    }
+
+  }
 }
